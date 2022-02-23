@@ -1,11 +1,10 @@
 package com.myspringapp.carsrentalstore.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Date;
 
 @Entity
@@ -30,7 +29,7 @@ public class Rent {
     @Column(name = "is_finished")
     private boolean isFinished;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne(optional = false,cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User userId;

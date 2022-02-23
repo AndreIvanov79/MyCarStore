@@ -1,10 +1,9 @@
 package com.myspringapp.carsrentalstore.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,7 +28,7 @@ public class User {
                 inverseJoinColumns=@JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany (mappedBy="userId", fetch=FetchType.LAZY)
     private Set<Rent> rents;
 
