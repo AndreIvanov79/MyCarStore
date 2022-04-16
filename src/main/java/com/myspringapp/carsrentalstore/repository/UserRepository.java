@@ -19,4 +19,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     @Query("select r from Rent r where r.userId.id=:id")
     Optional<Rent> getUsersRents(@Param("id") long id);
+
+    @Query("select r from Role r join User u where u.id=:id")
+    Optional<Role> getUsersRole(@Param("id") long id);
 }

@@ -86,6 +86,15 @@ public class UserController {
         }
     }
 
+    @GetMapping("/users/id/{id}/rrole")
+    public ResponseEntity<?> setOfUsersRole(@PathVariable("id") Long id){
+        try {
+            return new ResponseEntity<>(userService.setOfUserRoles(id), HttpStatus.OK);
+        } catch (HibernateException e) {
+            return new ResponseEntity<>("Server doesn't respond. Database error.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/users/id/{id}/cars")
     public ResponseEntity<?> getUsersCars(@PathVariable("id") Long id){
         try {
