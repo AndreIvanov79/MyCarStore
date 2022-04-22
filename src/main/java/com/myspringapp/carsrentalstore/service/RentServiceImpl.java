@@ -27,7 +27,7 @@ public class RentServiceImpl {
         rentRepository.saveAndFlush(rent);
     }
 
-    public void deletePrice(Rent rent){
+    public void deleteRent(Rent rent){
         rentRepository.delete(rent);
     }
 }
