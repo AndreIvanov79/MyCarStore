@@ -3,8 +3,10 @@ package com.myspringapp.carsrentalstore.controller;
 import com.myspringapp.carsrentalstore.model.Rent;
 import com.myspringapp.carsrentalstore.model.Role;
 import com.myspringapp.carsrentalstore.model.User;
+import com.myspringapp.carsrentalstore.service.CarServiceImpl;
 import com.myspringapp.carsrentalstore.service.RentServiceImpl;
 import com.myspringapp.carsrentalstore.service.UserServiceImpl;
+import io.swagger.annotations.Api;
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
+@Api
 @RestController
 @RequestMapping("/api/")
 public class UserController {
@@ -26,6 +28,9 @@ public class UserController {
 
     @Autowired
     private RentServiceImpl rentService;
+
+    @Autowired
+    private CarServiceImpl carService;
 
     @GetMapping("/users")
     public ResponseEntity<?> getAllUsers(){
@@ -69,7 +74,7 @@ public class UserController {
 
     @GetMapping("/users/id/{id}/rents")
     public ResponseEntity<?> getAllUsersRents(@PathVariable("id") Long id){
-        List<Rent> userRents=userService.getRentsOfUser(id).stream().collect(Collectors.toList());
+        List<Rent> userRents=rentService.getRentsOfUser(id).stream().collect(Collectors.toList());
         try {
             return new ResponseEntity<List<Rent>>(userRents, HttpStatus.OK);
         } catch (HibernateException e) {
@@ -98,7 +103,7 @@ public class UserController {
     @GetMapping("/users/id/{id}/cars")
     public ResponseEntity<?> getUsersCars(@PathVariable("id") Long id){
         try {
-            return new ResponseEntity<>(userService.getUsersCars(id), HttpStatus.OK);
+            return new ResponseEntity<>(carService.getUsersCars(id), HttpStatus.OK);
         } catch (HibernateException e) {
             return new ResponseEntity<>("Server doesn't respond. Database error.", HttpStatus.INTERNAL_SERVER_ERROR);
         }

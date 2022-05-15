@@ -30,4 +30,8 @@ public class RentServiceImpl {
     public void deleteRent(Rent rent){
         rentRepository.delete(rent);
     }
+
+    public Optional<Rent> getRentsOfUser(long userId){
+        return rentRepository.getUsersRents(userId);
+    }
 }

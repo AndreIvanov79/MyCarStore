@@ -34,4 +34,8 @@ public class VehicleServiceImpl {
     public void deleteVehicle(Vehicle vehicle){
         vehicleRepository.delete(vehicle);
     }
+
+    public String getTypeOfCar(long id){
+        return vehicleRepository.getVehicleTypeOfCar(id);
+    }
 }

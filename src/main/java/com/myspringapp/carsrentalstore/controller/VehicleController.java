@@ -1,6 +1,7 @@
 package com.myspringapp.carsrentalstore.controller;
 
 import com.myspringapp.carsrentalstore.service.VehicleServiceImpl;
+import io.swagger.annotations.Api;
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,4 +34,15 @@ public class VehicleController {
             return new ResponseEntity<>("User by ID " + id + "  not found in database", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping(value = "/vehicles/cartype/id/{id}")
+    public ResponseEntity<?> getTypeOfCar(@PathVariable("id") Long id) {
+        try {
+            return new ResponseEntity<>(vehicleService.getTypeOfCar(id), HttpStatus.OK);
+        } catch (HibernateException ex) {
+            return new ResponseEntity<>("Vehicle Type with ID " + id + "  not found in database", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 }
