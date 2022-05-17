@@ -35,7 +35,7 @@ public class VehicleServiceImpl {
         vehicleRepository.delete(vehicle);
     }
 
-    public String getTypeOfCar(long id){
+    public Vehicle getTypeOfCar(long id){
         return vehicleRepository.getVehicleTypeOfCar(id);
     }
 }

@@ -12,6 +12,6 @@ import java.util.Optional;
 public interface VehicleRepository extends JpaRepository<Vehicle,Long> {
     Optional<Vehicle> findByName(String name);
 
-    @Query("select v.name from Vehicle v join Car c where c.id=:id")
-    String getVehicleTypeOfCar(@Param("id") long id);
+    @Query("select c.vehicleId from Car c where c.id=:id")
+    Vehicle getVehicleTypeOfCar(@Param("id") long id);
 }

@@ -27,9 +27,6 @@ public class UserControllerTest {
         userController.getAllUsers();
         verify(userController).getAllUsers();
 
-        userController.getUsersCars(user.getId());
-        verify(userController).getUsersCars(user.getId());
-
         userController.getAllUsersRents(user.getId());
         verify(userController).getAllUsersRents(user.getId());
 

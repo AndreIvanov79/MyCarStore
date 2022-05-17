@@ -34,4 +34,12 @@ public class RentServiceImpl {
     public Optional<Rent> getRentsOfUser(long userId){
         return rentRepository.getUsersRents(userId);
     }
+
+    public List<Rent> getAllFinishedRents(){
+        return rentRepository.getAllFinishedRents();
+    }
+
+    public List<Rent> getAllCurrentRents(){
+        return rentRepository.getAllCurrentRents();
+    }
 }

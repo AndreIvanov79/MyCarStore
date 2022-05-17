@@ -99,13 +99,4 @@ public class UserController {
             return new ResponseEntity<>("Server doesn't respond. Database error.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    @GetMapping("/users/id/{id}/cars")
-    public ResponseEntity<?> getUsersCars(@PathVariable("id") Long id){
-        try {
-            return new ResponseEntity<>(carService.getUsersCars(id), HttpStatus.OK);
-        } catch (HibernateException e) {
-            return new ResponseEntity<>("Server doesn't respond. Database error.", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 }

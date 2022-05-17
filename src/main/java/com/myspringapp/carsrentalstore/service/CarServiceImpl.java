@@ -15,9 +15,6 @@ public class CarServiceImpl {
     @Autowired
     private CarRepository carRepository;
 
-    @Autowired
-    private RentRepository rentRepository;
-
     public List<Car> getAllCars(){
         return carRepository.findAll();
     }
@@ -38,9 +35,15 @@ public class CarServiceImpl {
         carRepository.delete(car);
     }
 
-    public Car getUsersCars(long id){
-        Optional<Rent> rents=rentRepository.getUsersRents(id);
-        Car car=rents.get().getCarId();
-        return car;
+    public Optional<Car> getUsersCars(long id){
+        return carRepository.getCarsOfUserById(id);
+    }
+
+    public List<Car> getListRentedCars(){
+        return carRepository.getAllRentedCars();
+    }
+
+    public List<Car> getListFreeCars(){
+        return carRepository.getAllFreeCars();
     }
 }

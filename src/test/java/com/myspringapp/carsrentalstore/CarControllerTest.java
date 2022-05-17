@@ -2,6 +2,7 @@ package com.myspringapp.carsrentalstore;
 
 import com.myspringapp.carsrentalstore.controller.CarController;
 import com.myspringapp.carsrentalstore.model.Car;
+import com.myspringapp.carsrentalstore.model.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -17,6 +18,9 @@ public class CarControllerTest {
     CarController carController;
 
     @Spy
+    User user;
+
+    @Spy
     Car car;
 
     @Test
@@ -26,5 +30,8 @@ public class CarControllerTest {
 
         carController.getCarById(1L);
         verify(carController).getCarById(1L);
+
+        carController.getUsersCars(user.getId());
+        verify(carController).getUsersCars(user.getId());
     }
 }

@@ -34,4 +34,31 @@ public class RentController {
             return new ResponseEntity<>("Rent by ID " + id + "  not found in database", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping(value = "/rents/ofuser/id/{id}")
+    public ResponseEntity<?> getRentsOfUser(@PathVariable("id") Long id){
+        try {
+            return new ResponseEntity<>(rentService.getRentsOfUser(id), HttpStatus.OK);
+        } catch (HibernateException ex) {
+            return new ResponseEntity<>("User with id["+id+"] has no rents.", HttpStatus.NOT_FOUND );
+        }
+    }
+
+    @GetMapping("/rents/finished")
+    public ResponseEntity<?> getAllFinishedRents(){
+        try {
+            return new ResponseEntity<>(rentService.getAllFinishedRents(), HttpStatus.OK);
+        } catch (HibernateException e){
+            return new ResponseEntity<>("There are no finished rents in that moment", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/rents/current")
+    public ResponseEntity<?> getAllCurrentRents(){
+        try {
+            return new ResponseEntity<>(rentService.getAllCurrentRents(), HttpStatus.OK);
+        } catch (HibernateException e){
+            return new ResponseEntity<>("There are no current rents in that moment", HttpStatus.NOT_FOUND);
+        }
+    }
 }

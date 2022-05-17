@@ -34,4 +34,31 @@ public class CarController {
             return new ResponseEntity<>("Car by ID " + id + "  not found in database", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/cars/ofuser/id/{id}")
+    public ResponseEntity<?> getUsersCars(@PathVariable("id") Long id){
+        try {
+            return new ResponseEntity<>(carService.getUsersCars(id), HttpStatus.OK);
+        } catch (HibernateException e) {
+            return new ResponseEntity<>("Server doesn't respond. Database error.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/cars/rented")
+    public ResponseEntity<?> getListRentedCars(){
+        try {
+            return new ResponseEntity<>(carService.getListRentedCars(), HttpStatus.OK);
+        } catch (HibernateException ex){
+            return new ResponseEntity<>("All cars are free", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/cars/free")
+    public ResponseEntity<?> getListFreeCars(){
+        try {
+            return new ResponseEntity<>(carService.getListFreeCars(), HttpStatus.OK);
+        } catch (HibernateException ex){
+            return new ResponseEntity<>("All cars are rented", HttpStatus.NOT_FOUND);
+        }
+    }
 }
