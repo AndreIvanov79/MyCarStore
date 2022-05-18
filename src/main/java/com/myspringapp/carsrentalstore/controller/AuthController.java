@@ -11,7 +11,6 @@ import com.myspringapp.carsrentalstore.pojo.SignUpRequest;
 import com.myspringapp.carsrentalstore.repository.RoleRepository;
 import com.myspringapp.carsrentalstore.repository.UserRepository;
 import com.myspringapp.carsrentalstore.service.UserDetailsImpl;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

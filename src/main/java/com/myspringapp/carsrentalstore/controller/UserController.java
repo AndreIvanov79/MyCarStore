@@ -1,25 +1,19 @@
 package com.myspringapp.carsrentalstore.controller;
 
 import com.myspringapp.carsrentalstore.model.Rent;
-import com.myspringapp.carsrentalstore.model.Role;
 import com.myspringapp.carsrentalstore.model.User;
 import com.myspringapp.carsrentalstore.service.CarServiceImpl;
 import com.myspringapp.carsrentalstore.service.RentServiceImpl;
 import com.myspringapp.carsrentalstore.service.UserServiceImpl;
-import io.swagger.annotations.Api;
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
-@Api
+
 @RestController
 @RequestMapping("/api/")
 public class UserController {
