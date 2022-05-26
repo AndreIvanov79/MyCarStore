@@ -2,6 +2,7 @@ package com.myspringapp.carsrentalstore;
 
 import com.myspringapp.carsrentalstore.controller.UserController;
 import com.myspringapp.carsrentalstore.model.User;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -20,6 +21,7 @@ public class UserControllerTest {
     User user;
 
     @Test
+    @DisplayName("Test GetRequest UserController")
     public void getRequestTest(){
         userController.getUserById(1L);
         verify(userController).getUserById(1L);
@@ -38,6 +40,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Test PostRequest UserController")
     public void postRequestTest(){
         userController.deleteUser(user.getId());
         verify(userController).deleteUser(user.getId());

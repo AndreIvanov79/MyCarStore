@@ -3,6 +3,7 @@ package com.myspringapp.carsrentalstore;
 import com.myspringapp.carsrentalstore.controller.AuthController;
 import com.myspringapp.carsrentalstore.pojo.LoginRequest;
 import com.myspringapp.carsrentalstore.pojo.SignUpRequest;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -24,12 +25,14 @@ public class AuthControllerTest {
     LoginRequest loginRequest;
 
     @Test
+    @DisplayName("Test User registration")
     public void registerUserTest(){
         authController.registerUser(signupRequest);
         verify(authController).registerUser(signupRequest);
     }
 
     @Test
+    @DisplayName("Test User authentication")
     public void authUserTest(){
         authController.authUser(loginRequest);
         verify(authController).authUser(loginRequest);

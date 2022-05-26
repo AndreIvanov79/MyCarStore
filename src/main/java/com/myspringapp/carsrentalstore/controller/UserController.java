@@ -5,6 +5,7 @@ import com.myspringapp.carsrentalstore.model.User;
 import com.myspringapp.carsrentalstore.service.CarServiceImpl;
 import com.myspringapp.carsrentalstore.service.RentServiceImpl;
 import com.myspringapp.carsrentalstore.service.UserServiceImpl;
+import lombok.extern.log4j.Log4j2;
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,9 +14,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Log4j2
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/v1/api/")
 public class UserController {
     @Autowired
     private UserServiceImpl userService;
@@ -89,6 +90,15 @@ public class UserController {
     public ResponseEntity<?> setOfUsersRole(@PathVariable("id") Long id){
         try {
             return new ResponseEntity<>(userService.setOfUserRoles(id), HttpStatus.OK);
+        } catch (HibernateException e) {
+            return new ResponseEntity<>("Server doesn't respond. Database error.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/users/withrents")
+    public ResponseEntity<?> getAllUsersWithCurrentRents(){
+        try {
+            return new ResponseEntity<>(userService.getUsersWithCurrentRents(), HttpStatus.OK);
         } catch (HibernateException e) {
             return new ResponseEntity<>("Server doesn't respond. Database error.", HttpStatus.INTERNAL_SERVER_ERROR);
         }

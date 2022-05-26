@@ -1,6 +1,8 @@
 package com.myspringapp.carsrentalstore.controller;
 
 import com.myspringapp.carsrentalstore.service.RentServiceImpl;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,9 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+@Log4j2
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/v1/api")
 public class RentController {
     @Autowired
     private RentServiceImpl rentService;
@@ -56,6 +58,15 @@ public class RentController {
     public ResponseEntity<?> getAllCurrentRents(){
         try {
             return new ResponseEntity<>(rentService.getAllCurrentRents(), HttpStatus.OK);
+        } catch (HibernateException e){
+            return new ResponseEntity<>("There are no current rents in that moment", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/rents/lists")
+    public ResponseEntity<?> getRentListsOfCurrentAndFinished(){
+        try {
+            return new ResponseEntity<>(rentService.getListOfRentsByFinishedFlag(rentService.getAllRents().stream()), HttpStatus.OK);
         } catch (HibernateException e){
             return new ResponseEntity<>("There are no current rents in that moment", HttpStatus.NOT_FOUND);
         }

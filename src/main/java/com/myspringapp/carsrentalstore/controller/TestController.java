@@ -1,13 +1,15 @@
 package com.myspringapp.carsrentalstore.controller;
 
+import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+@Log4j2
 @RestController
-@RequestMapping("/api/test")
+@RequestMapping("/v1/api/test")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class TestController {
 

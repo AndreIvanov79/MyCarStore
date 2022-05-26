@@ -1,6 +1,7 @@
 package com.myspringapp.carsrentalstore;
 
 import com.myspringapp.carsrentalstore.controller.RentController;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -16,6 +17,7 @@ public class RentControllerTest {
     RentController rentController;
 
     @Test
+    @DisplayName("Test RentController")
     public void getRequestTest(){
         rentController.getAllRents();
         verify(rentController).getAllRents();

@@ -1,6 +1,8 @@
 package com.myspringapp.carsrentalstore.controller;
 
 import com.myspringapp.carsrentalstore.service.CarServiceImpl;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,9 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+@Log4j2
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/v1/api")
 public class CarController {
     @Autowired
     private CarServiceImpl carService;
@@ -56,6 +58,15 @@ public class CarController {
     public ResponseEntity<?> getListFreeCars(){
         try {
             return new ResponseEntity<>(carService.getListFreeCars(), HttpStatus.OK);
+        } catch (HibernateException ex){
+            return new ResponseEntity<>("All cars are rented", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/cars/lists")
+    public ResponseEntity<?> getCarListSortedByFreeOrRented(){
+        try {
+            return new ResponseEntity<>(carService.getListOfCarsByRentedFlag(carService.getAllCars().stream()), HttpStatus.OK);
         } catch (HibernateException ex){
             return new ResponseEntity<>("All cars are rented", HttpStatus.NOT_FOUND);
         }

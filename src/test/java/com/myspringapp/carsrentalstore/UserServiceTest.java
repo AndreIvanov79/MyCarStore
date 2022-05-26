@@ -4,6 +4,7 @@ import com.myspringapp.carsrentalstore.model.User;
 import com.myspringapp.carsrentalstore.service.UserServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
@@ -36,6 +37,7 @@ public class UserServiceTest {
     }
 
     @Test
+    @DisplayName("Test getAllUsers")
     public void getUserListTest() {
         userService.getAllUsers();
         verify(userService).getAllUsers();
@@ -46,6 +48,7 @@ public class UserServiceTest {
     }
 
     @Test
+    @DisplayName("Test getUserByID")
     public void getUserByIdTest() {
         Optional<User> user1 = Optional.ofNullable(testUsers.get(0));
 
@@ -57,6 +60,7 @@ public class UserServiceTest {
     }
 
     @Test
+    @DisplayName("Test createUser")
     public void createUserTest() {
         User newUser = testUsers.get(1);
 
@@ -68,6 +72,7 @@ public class UserServiceTest {
     }
 
     @Test
+    @DisplayName("Test deleteUser")
     public void deleteUserTest() {
         userService.deleteUser(user.getId());
         verify(userService).deleteUser(user.getId());

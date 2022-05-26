@@ -4,12 +4,19 @@ import com.myspringapp.carsrentalstore.model.Car;
 import com.myspringapp.carsrentalstore.model.Price;
 import com.myspringapp.carsrentalstore.model.Rent;
 import com.myspringapp.carsrentalstore.repository.RentRepository;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.groupingBy;
+
+@Log4j2
 @Service
 public class RentServiceImpl {
     @Autowired
@@ -41,5 +48,9 @@ public class RentServiceImpl {
 
     public List<Rent> getAllCurrentRents(){
         return rentRepository.getAllCurrentRents();
+    }
+
+    public Map<Boolean,List<Rent>> getListOfRentsByFinishedFlag(Stream<Rent> rents){
+        return rents.collect(groupingBy(rent->rent.isFinished()));
     }
 }

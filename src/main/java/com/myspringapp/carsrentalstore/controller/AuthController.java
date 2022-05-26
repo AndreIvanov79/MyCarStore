@@ -11,6 +11,8 @@ import com.myspringapp.carsrentalstore.pojo.SignUpRequest;
 import com.myspringapp.carsrentalstore.repository.RoleRepository;
 import com.myspringapp.carsrentalstore.repository.UserRepository;
 import com.myspringapp.carsrentalstore.service.UserDetailsImpl;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,9 +26,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
+@Log4j2
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/v1/api/auth")
 @CrossOrigin(origins = "*",maxAge = 3600)
 public class AuthController {
 
@@ -45,8 +47,8 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
-    @PostMapping("/signin")
-    public ResponseEntity<?> authUser(@RequestBody LoginRequest loginRequest) {
+    @PostMapping("/v1/signin")
+    public ResponseEntity<JwtResponse> authUser(@RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(
@@ -67,7 +69,7 @@ public class AuthController {
                 roles));
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/v1/signup")
     public ResponseEntity<?> registerUser(@RequestBody SignUpRequest signupRequest) {
 
         if (userRepository.existsByUserName(signupRequest.getUserName())) {
