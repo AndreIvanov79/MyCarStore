@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
-@Log4j2
+
 @RestController
 @RequestMapping("/v1/api/")
 public class UserController {

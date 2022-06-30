@@ -2,10 +2,8 @@ package com.myspringapp.carsrentalstore.config;
 
 import com.myspringapp.carsrentalstore.config.jwt.AuthEntryPointJwt;
 import com.myspringapp.carsrentalstore.config.jwt.AuthTokenFilter;
-import com.myspringapp.carsrentalstore.service.UserDetailsServiceImpl;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -62,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/**").permitAll()
                 .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api/test/**").permitAll()
+                .antMatchers("/api/test/**").hasAnyAuthority("USER", "ADMIN", "OPERATOR")
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

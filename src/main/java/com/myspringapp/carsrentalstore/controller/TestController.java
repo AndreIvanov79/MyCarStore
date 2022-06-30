@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-@Log4j2
+
 @RestController
 @RequestMapping("/v1/api/test")
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -25,7 +25,7 @@ public class TestController {
     }
 
     @GetMapping("/oper")
-    @PreAuthorize("hasAnyRole('ADMIN','OPERATOR')")
+    //@PreAuthorize("hasAnyRole('ADMIN','OPERATOR')")
     public String getOperApi(){
         return "Operator API";
     }

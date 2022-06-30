@@ -2,10 +2,7 @@ package com.myspringapp.carsrentalstore.service;
 
 import com.myspringapp.carsrentalstore.model.Car;
 import com.myspringapp.carsrentalstore.repository.CarRepository;
-import lombok.extern.log4j.Log4j;
-import lombok.extern.log4j.Log4j2;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +13,7 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.groupingBy;
 
-@Log4j2
+@Slf4j
 @Service
 public class CarServiceImpl {
     //Logger logger = LoggerFactory.getLogger(CarServiceImpl.class);
