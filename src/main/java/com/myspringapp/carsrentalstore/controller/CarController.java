@@ -1,5 +1,6 @@
 package com.myspringapp.carsrentalstore.controller;
 
+import com.myspringapp.carsrentalstore.dto.DtoMapper;
 import com.myspringapp.carsrentalstore.service.CarServiceImpl;
 import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
@@ -13,15 +14,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/v1/api")
+@RequestMapping("/api/v1")
 public class CarController {
     @Autowired
     private CarServiceImpl carService;
 
+    @Autowired
+    private DtoMapper dtoMapper;
+
     @GetMapping("/cars")
     public ResponseEntity<?> getAllCars(){
         try {
-            return new ResponseEntity<>(carService.getAllCars(), HttpStatus.OK);
+            return new ResponseEntity<>(carService.getAllCars().stream().map(car -> dtoMapper.toCarDto(car)), HttpStatus.OK);
+//            return new ResponseEntity<>(carService.getAllCars(), HttpStatus.OK);
         } catch (HibernateException e) {
             return new ResponseEntity<>("Server doesn't respond. Database error.", HttpStatus.INTERNAL_SERVER_ERROR);
         }

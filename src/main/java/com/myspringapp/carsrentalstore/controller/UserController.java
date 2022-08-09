@@ -1,5 +1,7 @@
 package com.myspringapp.carsrentalstore.controller;
 
+import com.myspringapp.carsrentalstore.dto.DtoMapper;
+import com.myspringapp.carsrentalstore.dto.UserDTO;
 import com.myspringapp.carsrentalstore.model.Rent;
 import com.myspringapp.carsrentalstore.model.User;
 import com.myspringapp.carsrentalstore.service.CarServiceImpl;
@@ -16,10 +18,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/v1/api/")
+@RequestMapping("/api/v1")
 public class UserController {
     @Autowired
     private UserServiceImpl userService;
+
+    @Autowired
+    private DtoMapper dtoMapper;
 
     @Autowired
     private RentServiceImpl rentService;
@@ -30,7 +35,9 @@ public class UserController {
     @GetMapping("/users")
     public ResponseEntity<?> getAllUsers(){
         try {
-            return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+            return new ResponseEntity<>(userService.getAllUsers().stream().map(user -> dtoMapper.toUserDto(user))
+                    .collect(Collectors.toList()), HttpStatus.OK);
+//            return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
         } catch (HibernateException e) {
             return new ResponseEntity<>("Server doesn't respond. Database error.", HttpStatus.INTERNAL_SERVER_ERROR);
         }

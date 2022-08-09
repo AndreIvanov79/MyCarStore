@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/v1/api/test")
+@RequestMapping("/api/v1/test")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class TestController {
 
